@@ -1,4 +1,4 @@
 
-public class Arms {
+public class Arms extends SubsystemBase {
 
 }
