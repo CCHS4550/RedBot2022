@@ -1,40 +1,22 @@
 package frc.robot;
 
-import java.util.ResourceBundle.Control;
-import java.util.Set;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.helpers.OI;
-import frc.parent.ControlMap;
-import frc.parent.DDRMap;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.MotorEx;
 
-public class AutoBallin extends SequentialCommandGroup{
-    public AutoBallin(Chassis drive, Arms arms, Intake intake){
-        // InstantCommand startShoot = new InstantCommand(() -> shooter.setShoot(.7), shooter);
-        // InstantCommand startLoad = new InstantCommand(() -> shooter.setLoader(-0.8), shooter);
-        // InstantCommand intakeDown = new InstantCommand(() -> intake.setIntPower(-.75));
-        // InstantCommand intakeStop = new InstantCommand(() -> intake.setIntPower(0));
-        // InstantCommand stopShoot = new InstantCommand(() -> shooter.setShoot(0), shooter);
-        // InstantCommand stopLoad = new InstantCommand(() -> shooter.setLoader(0), shooter);
-        // InstantCommand startSuck = new InstantCommand(() -> intake.setSuck(0.7), intake);
-        // InstantCommand stopSuck = new InstantCommand(() -> intake.setSuck(0), intake);
+public class Autonomous extends SequentialCommandGroup{
+    //auto is set up such that it will run when yuo want it to
+
+    //inside the constructor you have to put an object of each subsystem you plan to use
+    public Autonomous(MotorEx example){
+        //put all commands within this super.addcommands
+        //make note that it uses commas instead of semicolons because you're technically adding them in a list
         super.addCommands(
-            Chassis.driveDist(-3, drive)
+            //whatever you put here must extend from command
+            //https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/package-summary.html
+            //check link for relevant subclasses
+            
+            example.runForTime(5, 0.5), //runs the motor at half power for 5 seconds
+            example.reachPos(0.7) //runs the motor until it reaches the specified position
         );
-    }
-
-    private Command delay(double time){
-        return new WaitCommand(time);
     }
 }
