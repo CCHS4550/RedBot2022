@@ -31,11 +31,9 @@ public class MotorEx extends SubsystemBase{
 
     public SequentialCommandGroup runForTime(double seconds, double power){
         SequentialCommandGroup res = new SequentialCommandGroup(
-            new InstantCommand(() -> {
-                setSpeed(power);
-            }),
+            new InstantCommand(() -> setSpeed(power)),
             new WaitCommand(seconds)
-        );wsedrfthuj
+        );
         return res;
     }
 
