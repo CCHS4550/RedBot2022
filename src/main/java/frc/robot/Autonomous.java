@@ -5,7 +5,6 @@ import frc.robot.subsystems.MotorEx;
 
 public class Autonomous extends SequentialCommandGroup{
     //auto is set up such that it will run when yuo want it to
-    //ryder
 
     //inside the constructor you have to put an object of each subsystem you plan to use
     public Autonomous(MotorEx example){
