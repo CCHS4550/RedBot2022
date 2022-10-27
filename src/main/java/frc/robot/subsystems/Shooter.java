@@ -1,4 +1,4 @@
 
-public class Shooter extends SubsystemBase{
+public class Shooter extends SubsystemBase {
 
 }
