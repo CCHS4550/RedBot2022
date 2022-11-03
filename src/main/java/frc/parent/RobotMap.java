@@ -18,6 +18,28 @@ package frc.parent;
         3. If the port is not plugged in, make int values -1, and boolean values false
 */
 public interface RobotMap {
-    public static final int EXAMPLE_MOTOR_PORT = 5318008;
-    public static final boolean EXAMPLE_MOTOR_REVERSE = false;
+     //DriveTrain Constants
+     public static final int FRONT_RIGHT = 0;
+     public static final boolean FRONT_RIGHT_REVERSE = false;
+     public static final int FRONT_LEFT = 1;
+     public static final boolean FRONT_LEFT_REVERSE = false;
+     public static final int BACK_RIGHT = 2;
+     public static final boolean BACK_RIGHT_REVERSE = false;
+     public static final int BACK_LEFT = 3;
+     public static final boolean BACK_LEFT_REVERSE = false;
+ 
+     //Shooter Constants
+     public static final int SHOOTER = 4;
+     public static final boolean SHOOTER_REVERSE = false;
+     public static final int LOADER = 5;
+     public static final boolean LOADER_REVERSE = false;
+     
+ 
+     //Bar Lifter Constants
+     public static final int LIFTER = 6;
+     public static final boolean LIFTER_REVERSE = false;
+
+     //Arms Constants
+     public static final int ARMS = 7;
+     public static final boolean ARMS_REVERSE = false;
 }
