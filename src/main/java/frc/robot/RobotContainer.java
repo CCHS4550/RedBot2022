@@ -24,7 +24,9 @@ public class RobotContainer {
         configureButtons();
         chassis.setDefaultCommand(new RunCommand(() -> chassis.axisDrive(OI.axis(0, ControlMap.L_JOYSTICK_VERTICAL), OI.axis(0, ControlMap.R_JOYSTICK_HORIZONTAL)), chassis));
         shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(OI.axis(1, ControlMap.RT)), shooter));
-        // arms.setDefualtCommand(new RunCommand(() -> arms.setSpeed(OI.dPad(1, )), arms);
+        arms.setDefaultCommand(new RunCommand(() -> arms.setSpeed(OI.dPadAng(1) > -1 ? Math.cos(Math.toRadians(OI.dPadAng(1))) : 0), arms));
+        
+        //arms.setDefualtCommand(new RunCommand(() -> arms.setSpeed(OI.dPad(1, )), arms);
     } 
         //This is Tyler's contribution to this code, you're welcome!!!
     private void configureButtons() {
