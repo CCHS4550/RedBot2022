@@ -33,4 +33,19 @@ public class DriveTrain extends SubsystemBase {
     public void axisDrive(double speed, double turnSpeed) {
         driveTrain.arcadeDrive(speed * speed, turnSpeed * turnSpeed);
     }
+
+    PIDController controller = new PIDController(.5, 0, 0);
+    public void targetPosition(double position, double speed){
+        axisDrive(position, speed);
+    }
+
+    public Command moveDistance(double pos, double speed){
+        RunCommand res = new RunCommand(() -> axisDrive(speed, ), this){
+            @Override
+            public boolean isFinished(){
+                return example.getPosition() - pos < 0.05;
+            }
+        };
+        return res;
+    }
 }

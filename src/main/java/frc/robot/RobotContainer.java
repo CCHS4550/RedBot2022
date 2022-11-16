@@ -62,6 +62,6 @@ public class RobotContainer {
 
     public Command getAutoCommand(){
         //see Autonomous class for more details
-        return new Autonomous(example);
+        return new Autonomous(chassis, shooter);
     }
 }
