@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class Autonomous extends SequentialCommandGroup{
     //auto is set up such that it will run when you want it to
@@ -13,10 +14,11 @@ public class Autonomous extends SequentialCommandGroup{
         super.addCommands(
             //whatever you put here must extend from command
             //https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/package-summary.html
-            //check link for relevant subclasses
-            
-            chassis.axisDrive(5, 0.5), //runs the motor at half power for 5 seconds
-            shooter.shoot(0.5) //runs the motor until it reaches the specified position
+            //check link for relevant subclasses 
+            chassis.turnAngle(45),
+            chassis.moveTo(7),
+            chassis.turnAngle(-90),
+            shooter.shoot(0.5)
         );
     }
 }

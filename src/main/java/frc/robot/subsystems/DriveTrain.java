@@ -40,7 +40,7 @@ public class DriveTrain extends SubsystemBase {
         driveTrain.arcadeDrive(speed * speed, turnSpeed * turnSpeed);
     }
 
-    PIDController controller = new PIDController(.5, 0, 0);
+    PIDController controller = new PIDController(.5, 0, .1);
     public Command moveTo(double position){
         RunCommand res = new RunCommand(() -> {
             left.set(controller.calculate(frontLeft.getPosition(), position));
@@ -49,7 +49,7 @@ public class DriveTrain extends SubsystemBase {
             @Override
             public boolean isFinished() {
                 // TODO Auto-generated method stub
-                return position.;
+                return Math.abs(position - frontLeft.getPosition()) < .5 && Math.abs(position - frontRight.getPosition()) < .5;
             }
         };
         return res;
@@ -57,12 +57,19 @@ public class DriveTrain extends SubsystemBase {
 
     PIDController angController = new PIDController(0.5, 0, 0);
     public Command turnAngle(double angle){
-        gyro.reset();
-        RunCommand res = new RunCommand(() -> {
-            gyro.reset();
-            axisDrive(0, gyro.getAngle());
-        }, this);
+        // gyro.reset();
+        RunCommand res = new RunCommand(() -> axisDrive(0, angController.calculate(gyro.getAngle(), angle)), this){
+            @Override
+            public boolean isFinished() {
+                // TODO Auto-generated method stub
+                return Math.abs(gyro.getAngle() - angle) < 5;
+            }
+        };
         return res;
+    }
+
+    public static void gyroReset(){
+        gyro.reset();
     }
 
     // public Command moveDist(double pos, double speed){
