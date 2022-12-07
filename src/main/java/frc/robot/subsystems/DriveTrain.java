@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.helpers.CCSparkMax;
 import frc.parent.RobotMap;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -30,6 +32,9 @@ public class DriveTrain extends SubsystemBase {
     private final CCSparkMax frontRight = new CCSparkMax("Front Right", "fr", RobotMap.FRONT_RIGHT, MotorType.kBrushless, IdleMode.kCoast, RobotMap.FRONT_RIGHT_REVERSE, true);
     private final CCSparkMax backLeft = new CCSparkMax("Back Left", "bl", RobotMap.BACK_LEFT, MotorType.kBrushless, IdleMode.kCoast, RobotMap.BACK_LEFT_REVERSE, true);
     private final CCSparkMax backRight = new CCSparkMax("Back Right", "br", RobotMap.BACK_RIGHT, MotorType.kBrushless, IdleMode.kCoast, RobotMap.BACK_RIGHT_REVERSE, true);
+
+    // Initializing solenoids
+    private Solenoid fastMode = new Solenoid(PneumaticsModuleType.CTREPCM, RobotMap.DRIVE_MODE);
 
     MotorControllerGroup left = new MotorControllerGroup(frontLeft, backLeft);
     MotorControllerGroup right = new MotorControllerGroup(frontRight, backRight);
@@ -71,6 +76,11 @@ public class DriveTrain extends SubsystemBase {
     public static void gyroReset(){
         gyro.reset();
     }
+
+    public void toggleFastMode(){
+        fastMode.toggle();
+    }
+
 
     // public Command moveDist(double pos, double speed){
     //         RunCommand res = new RunCommand(() -> axisDrive(speed, lp-), this){

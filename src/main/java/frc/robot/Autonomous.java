@@ -18,7 +18,7 @@ public class Autonomous extends SequentialCommandGroup{
             chassis.turnAngle(45),
             chassis.moveTo(7),
             chassis.turnAngle(-90),
-            shooter.shoot(0.5)
+            shooter.shootForTime(0.5, 3)
         );
     }
 }

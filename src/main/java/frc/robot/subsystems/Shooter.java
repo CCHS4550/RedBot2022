@@ -18,13 +18,17 @@ import frc.parent.RobotMap;
 public class Shooter extends SubsystemBase {
   // Initializing shooter motors
     final CCSparkMax shooter = new CCSparkMax("Shooter", "shoot", RobotMap.SHOOTER, MotorType.kBrushless, IdleMode.kBrake, RobotMap.SHOOTER_REVERSE, true);
-    final CCSparkMax loader = new CCSparkMax("Loader", "load", RobotMap.LOADER, MotorType.kBrushless, IdleMode.kBrake, RobotMap.LOADER_REVERSE, true);
 
     public void shoot(double speed) {
         shooter.set(speed);
     }
 
-    public void load(double speed){
-        loader.set(speed);
+    public Command shootForTime(double power, double time){
+        SequentialCommandGroup res = new SequentialCommandGroup(
+            new InstantCommand(() -> shoot(power)),
+            new WaitCommand(time),
+            new InstantCommand(() -> shoot(0))
+        );
+        return res;
     }
 }
