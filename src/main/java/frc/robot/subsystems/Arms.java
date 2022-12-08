@@ -10,6 +10,12 @@ import frc.helpers.CCSparkMax;
 import frc.parent.RobotMap;
 
 public class Arms extends SubsystemBase {
+    //hey there, vicky here, your solenoid definitions are wrong
+    //a solenoid works by letting pressure through and pushing a thing out
+    //so there's no way to pull back in when only using one
+    //so to have a functioning pneumatics system, you need to have 2 solenoids
+    //to simplify it, there's a pneumaticssystem class that makes things easier to deal with,
+    //basically just setting 2 solenoids opposite each other
     Solenoid arms = new Solenoid(PneumaticsModuleType.CTREPCM, RobotMap.ARMS);
 
     public void toggleArms() {
