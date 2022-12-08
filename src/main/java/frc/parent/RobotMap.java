@@ -28,12 +28,13 @@ public interface RobotMap {
      public static final int BACK_LEFT = 3;
      public static final boolean BACK_LEFT_REVERSE = false;
      //Solenoid
-     public static final int DRIVE_MODE = 1;
+     public static final int DRIVE_MODE = 2;
  
      //Shooter Constants
      public static final int SHOOTER = 4;
      public static final boolean SHOOTER_REVERSE = false;
 
      //Arms Constants (pneumatics)
-     public static final int ARMS = 0;
+     public static final int ARMS_ONE = 0;
+     public static final int ARMS_TWO = 1;
 }
