@@ -21,6 +21,7 @@ public class RobotContainer {
     public RobotContainer(){
         configureButtons();
         chassis.setDefaultCommand(new RunCommand(() -> chassis.axisDrive(OI.axis(0, ControlMap.L_JOYSTICK_VERTICAL), OI.axis(0, ControlMap.R_JOYSTICK_HORIZONTAL)), chassis));
+        // chassis.setDefaultCommand(new RunCommand(() -> chassis.print(OI.axis(0, ControlMap.L_JOYSTICK_VERTICAL)), chassis));
         shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(OI.axis(1, ControlMap.RT)), shooter));
         // arms.setDefaultCommand(new RunCommand(() -> arms.setSpeed(OI.dPadAng(1) > -1 ? Math.cos(Math.toRadians(OI.dPadAng(1))) : 0), arms));
         

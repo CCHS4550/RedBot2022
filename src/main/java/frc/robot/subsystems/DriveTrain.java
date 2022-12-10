@@ -42,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
     DifferentialDrive driveTrain = new DifferentialDrive(left, right);
 
     public void axisDrive(double speed, double turnSpeed) {
-        driveTrain.arcadeDrive(speed * speed, turnSpeed * turnSpeed);
+        driveTrain.arcadeDrive(speed * speed * Math.signum(speed) * -1, turnSpeed * turnSpeed * Math.signum(turnSpeed));
     }
 
     PIDController controller = new PIDController(.5, 0, .1);
@@ -81,6 +81,9 @@ public class DriveTrain extends SubsystemBase {
         fastMode.toggle();
     }
 
+    public void print(double s){
+        System.out.println(s);
+    }
 
     // public Command moveDist(double pos, double speed){
     //         RunCommand res = new RunCommand(() -> axisDrive(speed, lp-), this){

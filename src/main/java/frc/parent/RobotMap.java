@@ -19,19 +19,19 @@ package frc.parent;
 */
 public interface RobotMap {
      //DriveTrain Constants
-     public static final int FRONT_RIGHT = 0;
+     public static final int FRONT_RIGHT = 4;
      public static final boolean FRONT_RIGHT_REVERSE = false;
      public static final int FRONT_LEFT = 1;
-     public static final boolean FRONT_LEFT_REVERSE = false;
-     public static final int BACK_RIGHT = 2;
+     public static final boolean FRONT_LEFT_REVERSE = true;
+     public static final int BACK_RIGHT = 3;
      public static final boolean BACK_RIGHT_REVERSE = false;
-     public static final int BACK_LEFT = 3;
-     public static final boolean BACK_LEFT_REVERSE = false;
+     public static final int BACK_LEFT = 2;
+     public static final boolean BACK_LEFT_REVERSE = true;
      //Solenoid
      public static final int DRIVE_MODE = 2;
  
      //Shooter Constants
-     public static final int SHOOTER = 4;
+     public static final int SHOOTER = 5;
      public static final boolean SHOOTER_REVERSE = false;
 
      //Arms Constants (pneumatics)
