@@ -41,15 +41,16 @@ public class DriveTrain extends SubsystemBase {
     
     DifferentialDrive driveTrain = new DifferentialDrive(left, right);
 
+    public double driveCap = .5;
     public void axisDrive(double speed, double turnSpeed) {
-        driveTrain.arcadeDrive(speed * speed * Math.signum(speed) * -1, turnSpeed * turnSpeed * Math.signum(turnSpeed));
+        driveTrain.arcadeDrive(speed * speed * Math.signum(speed) * -1 * driveCap, turnSpeed * turnSpeed * Math.signum(turnSpeed) * driveCap);
     }
 
     PIDController controller = new PIDController(.5, 0, .1);
     public Command moveTo(double position){
         RunCommand res = new RunCommand(() -> {
-            left.set(controller.calculate(frontLeft.getPosition(), position));
-            right.set(controller.calculate(frontRight.getPosition(), position));
+            left.set(controller.calculate(frontLeft.getPosition(), position) * driveCap);
+            right.set(controller.calculate(frontRight.getPosition(), position) * driveCap);
         }, this){
             @Override
             public boolean isFinished() {

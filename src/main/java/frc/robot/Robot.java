@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
     @SuppressWarnings("resource")
     Compressor c = new Compressor(PneumaticsModuleType.CTREPCM);
     c.enableDigital();
+    // c.disable();
     DriveTrain.gyroReset(); 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
