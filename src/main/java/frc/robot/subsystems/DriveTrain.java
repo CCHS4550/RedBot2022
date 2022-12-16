@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.helpers.CCSparkMax;
+import frc.helpers.OI;
+import frc.helpers.PneumaticsSystem;
 import frc.parent.RobotMap;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
@@ -34,7 +36,7 @@ public class DriveTrain extends SubsystemBase {
     private final CCSparkMax backRight = new CCSparkMax("Back Right", "br", RobotMap.BACK_RIGHT, MotorType.kBrushless, IdleMode.kCoast, RobotMap.BACK_RIGHT_REVERSE, true);
 
     // Initializing solenoids
-    private Solenoid fastMode = new Solenoid(PneumaticsModuleType.CTREPCM, RobotMap.DRIVE_MODE);
+    PneumaticsSystem fastMode = new PneumaticsSystem(PneumaticsModuleType.CTREPCM, RobotMap.DRIVE_MODE_ONE, RobotMap.DRIVE_MODE_TWO);
 
     MotorControllerGroup left = new MotorControllerGroup(frontLeft, backLeft);
     MotorControllerGroup right = new MotorControllerGroup(frontRight, backRight);
@@ -64,7 +66,7 @@ public class DriveTrain extends SubsystemBase {
     PIDController angController = new PIDController(0.5, 0, 0);
     public Command turnAngle(double angle){
         // gyro.reset();
-        RunCommand res = new RunCommand(() -> axisDrive(0, angController.calculate(gyro.getAngle(), angle)), this){
+        RunCommand res = new RunCommand(() -> axisDrive(0, OI.normalize(angController.calculate(gyro.getAngle(), angle), -1, 1)), this){
             @Override
             public boolean isFinished() {
                 // TODO Auto-generated method stub

@@ -18,7 +18,7 @@ public class Arms extends SubsystemBase {
     //to simplify it, there's a pneumaticssystem class that makes things easier to deal with,
     //basically just setting 2 solenoids opposite each other
     PneumaticsSystem arms = new PneumaticsSystem(PneumaticsModuleType.CTREPCM, RobotMap.ARMS_ONE, RobotMap.ARMS_TWO);
-    
+
     public void toggleArms() {
         arms.toggle();
     }
