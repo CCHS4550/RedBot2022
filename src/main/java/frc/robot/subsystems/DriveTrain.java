@@ -73,6 +73,15 @@ public class DriveTrain extends SubsystemBase {
         return res;
     }
 
+    public Command runForTime(double speedd, double turnSpeedd, double time){
+        SequentialCommandGroup res = new SequentialCommandGroup(
+            new InstantCommand(() -> axisDrive(speedd, turnSpeedd)),
+            new WaitCommand(time),
+            new InstantCommand(() -> axisDrive(0, 0))
+        );
+        return res; 
+    }
+
     PIDController angController = new PIDController(0.5, 0, 0);
     public Command turnAngle(double angle){
         // gyro.reset();

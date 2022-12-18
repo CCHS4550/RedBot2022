@@ -16,9 +16,10 @@ public class Autonomous extends SequentialCommandGroup{
             //https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/package-summary.html
             //check link for relevant subclasses 
             // chassis.turnAngle(45),
-            chassis.moveTo(3),
+            chassis.runForTime(-1, 0, 5),
             // chassis.turnAngle(-90),
-            shooter.shootForTime(0.5, 3)
+            shooter.shootForTime(1, 5)
+
         );
     }
 }

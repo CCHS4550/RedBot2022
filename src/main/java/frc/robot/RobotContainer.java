@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.helpers.OI;
 import frc.parent.ControlMap;
+import frc.parent.LogitecMap;
 import frc.robot.subsystems.*;
 public class RobotContainer {
     //must instantiate an object of each subsystem you use
@@ -21,9 +22,9 @@ public class RobotContainer {
 
     public RobotContainer(){
         configureButtons();
-        chassis.setDefaultCommand(new RunCommand(() -> chassis.axisDrive(OI.axis(0, ControlMap.L_JOYSTICK_VERTICAL), OI.axis(0, ControlMap.R_JOYSTICK_HORIZONTAL)), chassis));
+        chassis.setDefaultCommand(new RunCommand(() -> chassis.axisDrive(OI.axis(0, LogitecMap.L_JOYSTICK_VERTICAL), OI.axis(0, LogitecMap.R_JOYSTICK_HORIZONTAL)), chassis));
         // chassis.setDefaultCommand(new RunCommand(() -> chassis.print(OI.axis(0, ControlMap.L_JOYSTICK_VERTICAL)), chassis));
-        shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(OI.axis(1, ControlMap.R_JOYSTICK_VERTICAL) * -1), shooter));
+        shooter.setDefaultCommand(new RunCommand(() -> shooter.shoot(OI.axis(1, ControlMap.R_JOYSTICK_VERTICAL) * -1 * 2), shooter));
         // shooter.setDefaultCommand(new ConditionalCommand(shooter.shoot(OI.axis(1, ControlMap.RT)), shooter.shoot(OI.axis(1, ControlMap.RT) * -1), //a buttonr pressed  shooter));
         // arms.setDefaultCommand(new RunCommand(() -> arms.setSpeed(OI.dPadAng(1) > -1 ? Math.cos(Math.toRadians(OI.dPadAng(1))) : 0), arms));
         
@@ -47,7 +48,7 @@ public class RobotContainer {
         // final double ACTIVE_ANALOG_CONSTANT = .15;
 
 
-        new JoystickButton(controllers[0], ControlMap.A_BUTTON)
+        new JoystickButton(controllers[0], LogitecMap.A_BUTTON)
          .whenPressed(() -> chassis.toggleFastMode());
 
         new JoystickButton(controllers[1], ControlMap.A_BUTTON)
