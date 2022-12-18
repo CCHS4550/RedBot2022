@@ -43,30 +43,40 @@ public class DriveTrain extends SubsystemBase {
     
     DifferentialDrive driveTrain = new DifferentialDrive(left, right);
 
-    public double driveCap = .5;
+    public double driveCap = .6;
     public void axisDrive(double speed, double turnSpeed) {
-        driveTrain.arcadeDrive(speed * speed * Math.signum(speed) * -1 * driveCap, turnSpeed * turnSpeed * Math.signum(turnSpeed) * driveCap);
+        driveTrain.arcadeDrive(OI.normalize(speed * speed * Math.signum(speed) * -1, -1, 1) * driveCap, OI.normalize(turnSpeed * turnSpeed * Math.signum(turnSpeed), -1, 1) * driveCap);
     }
 
     PIDController controller = new PIDController(.5, 0, .1);
     public Command moveTo(double position){
-        RunCommand res = new RunCommand(() -> {
-            left.set(controller.calculate(frontLeft.getPosition(), position) * driveCap);
-            right.set(controller.calculate(frontRight.getPosition(), position) * driveCap);
+        RunCommand move = new RunCommand(() -> {
+        left.set(OI.normalize(controller.calculate(frontLeft.getPosition(), position), -1, 1) * driveCap * .5);
+        right.set(OI.normalize(controller.calculate(frontRight.getPosition(), position), -1, 1) * driveCap * .5);
         }, this){
             @Override
             public boolean isFinished() {
                 // TODO Auto-generated method stub
-                return Math.abs(position - frontLeft.getPosition()) < .5 && Math.abs(position - frontRight.getPosition()) < .5;
+                System.out.println("Left: " + frontLeft.getPosition());
+                System.out.println("Right: " + frontRight.getPosition());
+                return Math.abs(position + frontRight.getPosition()) < .5;
             }
         };
+        InstantCommand reset = new InstantCommand(() -> {
+            frontLeft.reset();
+            frontRight.reset();
+        });
+        SequentialCommandGroup res = new SequentialCommandGroup(
+            reset,
+            move
+        );
         return res;
     }
 
     PIDController angController = new PIDController(0.5, 0, 0);
     public Command turnAngle(double angle){
         // gyro.reset();
-        RunCommand res = new RunCommand(() -> axisDrive(0, OI.normalize(angController.calculate(gyro.getAngle(), angle), -1, 1)), this){
+        RunCommand res = new RunCommand(() -> axisDrive(0, angController.calculate(gyro.getAngle(), angle)), this){
             @Override
             public boolean isFinished() {
                 // TODO Auto-generated method stub
@@ -84,9 +94,9 @@ public class DriveTrain extends SubsystemBase {
         fastMode.toggle();
     }
 
-    public void print(double s){
-        System.out.println(s);
-    }
+    // public void print(double s){
+    //     System.out.println(s);
+    // }
 
     // public Command moveDist(double pos, double speed){
     //         RunCommand res = new RunCommand(() -> axisDrive(speed, lp-), this){
